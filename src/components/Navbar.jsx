@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { BiX, BiMenu } from "react-icons/bi";
 import { BsGithub, BsLinkedin, BsYoutube } from "react-icons/bs"
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 
 const Navbar = () => {
@@ -21,14 +21,14 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 z-10 flex w-full items-right justify-between px-12 py-6 text-white md:justify-evenly">
-        <motion.a
+        <Motion.a
             href="#home"
             className="flex items-center"
             initial= "rest"
             animate={logoState}
             whileHover="hover"
         >
-            <motion.svg
+            <Motion.svg
                 id="target"
                 width="40"
                 height="40"
@@ -98,8 +98,8 @@ const Navbar = () => {
                     d="M337.612 140.551L373.707 176.646L337.612 212.741L220.933 329.42L184.838 293.325L301.517 176.646L184.838 59.9671L220.933 23.8722L337.612 140.551Z"
                     fill="url(#rbracketGradient)"
                 />
-            </motion.svg>
-        </motion.a>
+            </Motion.svg>
+        </Motion.a>
 
         <div className="flex items-center gap-10 px-5">
             <ul className="hidden md:flex gap-10">

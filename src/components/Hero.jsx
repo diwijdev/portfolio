@@ -1,6 +1,6 @@
 import "./hero.scss"
 import React, { useEffect, useState } from 'react';
-import { motion, useAnimate } from "framer-motion";
+import { motion as Motion, useAnimate } from "framer-motion";
 
 
 
@@ -77,18 +77,17 @@ export const Hero = () => {
     const [scope, animate] = useAnimate();
     const [animationTriggered, setAnimationTriggered] = useState(false);
 
-    const handleAnimation = async () => {
-        // Define an array to store all the promises from the animations
-        if (!animationTriggered) {
+    useEffect(() => {
+        if (animationTriggered) return;
+
+        let cancelled = false;
+        const runAnimation = async () => {
             const animations = [];
-        
-            // First set of animations
+
             animations.push(
                 animate(
                     scope.current,
-                    {
-                        y: "-100%"
-                    },
+                    { y: "-100%" },
                     {
                         type: "spring",
                         stiffness: 80,
@@ -100,10 +99,7 @@ export const Hero = () => {
             animations.push(
                 animate(
                     "#rightBracket",
-                    {
-                        x: 98,
-                        y: 23,
-                    },
+                    { x: 98, y: 23 },
                     {
                         delay: 1,
                         duration: 0.5,
@@ -113,10 +109,7 @@ export const Hero = () => {
             animations.push(
                 animate(
                     "#leftBracket",
-                    {
-                        x: -98,
-                        y: -23,
-                    },
+                    { x: -98, y: -23 },
                     {
                         delay: 1,
                         duration: 0.5,
@@ -126,13 +119,7 @@ export const Hero = () => {
             animations.push(
                 animate(
                     "#slash",
-                    {
-                        x: -278,
-                        y: -225,
-                        width: 230,
-                        type: "spring",
-                        stiffness: 80,
-                    },
+                    { x: -278, y: -225, width: 230, type: "spring", stiffness: 80 },
                     {
                         delay: 1,
                         duration: 0.5,
@@ -142,10 +129,7 @@ export const Hero = () => {
             animations.push(
                 animate(
                     "#shadow1",
-                    {
-                        x: 57,
-                        y: 57,
-                    },
+                    { x: 57, y: 57 },
                     {
                         delay: 1,
                         duration: 0.5,
@@ -155,49 +139,43 @@ export const Hero = () => {
             animations.push(
                 animate(
                     "#shadow2",
-                    {
-                        x: -25,
-                        y: -25,
-                    },
+                    { x: -25, y: -25 },
                     {
                         delay: 1,
                         duration: 0.5,
                     }
                 )
             );
-        
-            // Wait for all the animations to complete
+
             await Promise.all(animations);
-        
-            // Last animation
-            animate(
+
+            await animate(
                 scope.current,
-                {
-                    scale: 2.5,
-                    x: "75%",
-                    y: 0,
-                },
+                { scale: 2.5, x: "75%", y: 0 },
                 {
                     delay: 0.5,
                     duration: 1,
                 }
             );
 
-            setAnimationTriggered(true);
-        }
-    };
+            if (!cancelled) {
+                setAnimationTriggered(true);
+            }
+        };
 
-    useEffect(() => {
-        // Call the handleAnimation function when the component mounts
-        handleAnimation();
-    }, []); // Empty dependency array ensures this effect runs only once
+        runAnimation();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [animate, animationTriggered, scope]);
     
     
     return (
         <div id='home' className="container flex flex-wrap min-h-screen items-center justify-center">
-            <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ml-2 md:block hidden" variants={mainlogo} initial="initial" animate="animate" 
+            <Motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ml-2 md:block hidden" variants={mainlogo} initial="initial" animate="animate" 
                 >
-                    <motion.svg id="target" width="399" height="199" viewBox="0 0 399 399" fill="none" ref={scope} xmlns="http://www.w3.org/2000/svg">
+                    <Motion.svg id="target" width="399" height="199" viewBox="0 0 399 399" fill="none" ref={scope} xmlns="http://www.w3.org/2000/svg">
 
                         <defs>
                             <linearGradient id="lbracketGradient" x1="0" y1="0" x2="0.62" y2="1">
@@ -217,25 +195,30 @@ export const Hero = () => {
                             <stop offset="100%" stopColor="#9f0b1d" />
                             </linearGradient>
                         </defs>
-                        <motion.path id="leftBracket"/*variants={lBracket} initial="initial" animate="animate"*/ fill-rule="evenodd" clip-rule="evenodd" d="M176.164 68.9825L59.4857 185.661L23.3908 221.756L23.3908 221.756L59.4857 257.851L176.164 374.53L212.259 338.435L95.5806 221.756L212.259 105.077L176.164 68.9825Z" fill="url(#lbracketGradient)" />
-                        <motion.path id="shadow2"/*variants={shadow2}*/ opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M134.685 110.462L170.78 146.556L134.685 182.651L98.5905 146.556L134.685 110.462Z" fill="black" />
-                        <motion.rect id="slash" variants={slash} initial="initial" animate="animate" x="362.905" y="399" width="513.225" height="51.0459" transform="rotate(-135 362.905 399)" fill="url(#slashGradient)"/>
-                        <motion.path id="shadow1"/*variants={shadow1}*/ initial="initial" animate="animate" opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M215.098 251.193L251.193 215.098L287.288 251.193L251.193 287.288L215.098 251.193Z" fill="black" />
-                        <motion.path id="rightBracket"/*variants={rBracket} initial="initial" animate="animate"*/ fill-rule="evenodd" clip-rule="evenodd" d="M337.612 140.551L373.707 176.646L337.612 212.741L220.933 329.42L184.838 293.325L301.517 176.646L184.838 59.9671L220.933 23.8722L337.612 140.551Z" fill="url(#rbracketGradient)" />
-                    </motion.svg>
-                </motion.div>
+                        <Motion.path id="leftBracket"/*variants={lBracket} initial="initial" animate="animate"*/ fill-rule="evenodd" clip-rule="evenodd" d="M176.164 68.9825L59.4857 185.661L23.3908 221.756L23.3908 221.756L59.4857 257.851L176.164 374.53L212.259 338.435L95.5806 221.756L212.259 105.077L176.164 68.9825Z" fill="url(#lbracketGradient)" />
+                        <Motion.path id="shadow2"/*variants={shadow2}*/ opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M134.685 110.462L170.78 146.556L134.685 182.651L98.5905 146.556L134.685 110.462Z" fill="black" />
+                        <Motion.rect id="slash" variants={slash} initial="initial" animate="animate" x="362.905" y="399" width="513.225" height="51.0459" transform="rotate(-135 362.905 399)" fill="url(#slashGradient)"/>
+                        <Motion.path id="shadow1"/*variants={shadow1}*/ initial="initial" animate="animate" opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M215.098 251.193L251.193 215.098L287.288 251.193L251.193 287.288L215.098 251.193Z" fill="black" />
+                        <Motion.path id="rightBracket"/*variants={rBracket} initial="initial" animate="animate"*/ fill-rule="evenodd" clip-rule="evenodd" d="M337.612 140.551L373.707 176.646L337.612 212.741L220.933 329.42L184.838 293.325L301.517 176.646L184.838 59.9671L220.933 23.8722L337.612 140.551Z" fill="url(#rbracketGradient)" />
+                    </Motion.svg>
+                </Motion.div>
             <div className="flex flex-col relative">                
                 
-                <motion.div className="flex flex-wrap flex-row items-center gap-10"
+                <Motion.div className="flex flex-wrap flex-row items-center gap-10"
                     variants={svgVariants}
                     initial="initial"
                     animate="animate"
                 >
-                    <motion.div className="relative flex flex-col md:flex-row items-center justify-center md:justify-between w-full gap-x-10">
-                        <motion.h1 className="font-light text-[87px] ml-7 tracking-[40px] bg-gradient-to-b from-[#ED1B68] via-[#ED1B68] to-[#9f0b1d] bg-clip-text text-transparent" variants={nameVariants} initial= "initial" animate= "animate"> 
+                    <Motion.div className="relative flex flex-col md:flex-row items-center justify-center md:justify-between w-full gap-x-10">
+                        <Motion.h1
+                            className="font-light text-[87px] ml-7 tracking-[40px] bg-gradient-to-b from-[#ED1B68] via-[#ED1B68] to-[#9f0b1d] bg-clip-text text-transparent [-webkit-text-fill-color:transparent] inline-block"
+                            variants={nameVariants}
+                            initial="initial"
+                            animate="animate"
+                        > 
                             DIWIJ
-                        </motion.h1>
-                        <motion.div className="mb-1.5"
+                        </Motion.h1>
+                        <Motion.div className="mb-1.5"
                             variants={svgVariants}>
                             <svg id="logo" width="275" height="65" viewBox="0 0 290 72" fill="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -253,22 +236,22 @@ export const Hero = () => {
                                     strokeWidth="2"
                                 />
                             </svg>
-                        </motion.div>
-                        <motion.h1 className="font-light text-[87px] opacity-0 tracking-[40px] text-transparent absolute md:relative" > 
+                        </Motion.div>
+                        <Motion.h1 className="font-light text-[87px] opacity-0 tracking-[40px] text-transparent absolute md:relative" > 
                             DIWIJ
-                        </motion.h1>
-                    </motion.div>
+                        </Motion.h1>
+                    </Motion.div>
 
-                </motion.div>
-                <motion.div className="flex flex-wrap items-center justify-items-start relative md:items-start"
+                </Motion.div>
+                <Motion.div className="flex flex-wrap items-center justify-items-start relative md:items-start"
                     variants={pTag}
                     initial="initial"
                     animate="animate"
                 >
-                    <motion.p className="absolute translate-y-20 md:px-8.5 md:text-xl md:font-light">
+                    <Motion.p className="absolute translate-y-20 md:px-8.5 md:text-xl md:font-light">
                         Part developer, part designer, part data nerd — fully caffeinated.
-                    </motion.p>
-                </motion.div>
+                    </Motion.p>
+                </Motion.div>
             </div>
         </div>
     )
