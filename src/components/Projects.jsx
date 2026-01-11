@@ -3,6 +3,7 @@ import among from '/among.png'
 import { LiaExternalLinkAltSolid } from "react-icons/lia";
 import { GoDotFill } from "react-icons/go";
 import SectionHeader from './SectionHeader';
+import Card from './aboutme/Card';
 
 const portfolioProjects = [
   {
@@ -41,6 +42,18 @@ const portfolioProjects = [
     link: "https://youtu.be/Z7I5uSRHMHg",
     image: among,
   },
+  {
+    company: "Quantum Dynamics",
+    year: "2023",
+    title: "AI Startup Landing Page",
+    results: [
+      { title: "Enhanced user experience by 40%" },
+      { title: "Improved site speed by 50%" },
+      { title: "Increased mobile traffic by 35%" },
+    ],
+    link: "https://youtu.be/Z7I5uSRHMHg",
+    image: among,
+  },
 ];
 
 
@@ -51,8 +64,10 @@ const Projects = () => {
       <div id='projects' className="container flex flex-col min-h-screen items-center justify-center">
         <SectionHeader title= "My Projects" subtitle="Things I have been working on recently"/>
         <div className="flex flex-col mt-10 gap-20  md:pt-12 md:px-10 lg:pt-16 lg:px-20">
-          {portfolioProjects.map(project => (
-            <div key={project.title} className="bg-[#0f151f]/70 rounded-3xl border-1 border-white/20 px-8 pt-8 overflow-hidden md:pt-8 md:px-10 lg:px-10">
+          {portfolioProjects.map((project, projectIndex) => (
+            <Card key={project.title} className="backdrop-blur-md px-8 pt-8 overflow-hidden md:pt-8 md:px-10 lg:px-10 sticky" 
+            style={{ top: `calc(124px + ${projectIndex * 70}px)`}}
+            >
               <div className='lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center lg:overflow-hidden'>  
                 <div className='lg:pb-8 lg:pl-8'>
                   <span>{project.company}</span>
@@ -78,7 +93,7 @@ const Projects = () => {
                   <img className="mt-8 -mb-4 lg:-mt-8 rounded-4xl" src={project.image} alt={project.title} />
                 </div>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>
