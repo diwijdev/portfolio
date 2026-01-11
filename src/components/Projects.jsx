@@ -1,5 +1,8 @@
 import React from 'react'
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import among from '/among.png'
+import me from '/anotherMe.jpg'
 import { LiaExternalLinkAltSolid } from "react-icons/lia";
 import { GoDotFill } from "react-icons/go";
 import SectionHeader from './SectionHeader';
@@ -28,7 +31,7 @@ const portfolioProjects = [
       { title: "Increased brand awareness by 15%" },
     ],
     link: "https://youtu.be/7hi5zwO75yc",
-    image: among,
+    image: me,
   },
   {
     company: "Quantum Dynamics",
@@ -56,7 +59,27 @@ const portfolioProjects = [
   },
 ];
 
+const ProjectImageZoom = ({ src, alt }) => {
+  const containerRef = useRef(null);
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "start center"], // start zooming when container enters, finish when it reaches top
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [1.25, 1]); // zoomed in -> normal
+
+  return (
+    <div ref={containerRef} className="relative w-full">
+      <motion.img
+        src={src}
+        alt={alt}
+        style={{ scale }}
+        className="w-full h-full object-cover block will-change-transform"
+      />
+    </div>
+  );
+};
 
 const Projects = () => {
   return (
@@ -89,8 +112,8 @@ const Projects = () => {
                     </button>
                   </a>
                 </div>
-                <div>
-                  <img className="mt-8 -mb-4 lg:-mt-8 rounded-4xl" src={project.image} alt={project.title} />
+                <div className="relative overflow-hidden rounded-3xl mt-8 -mb-4 lg:-mt-8">
+                  <ProjectImageZoom src={project.image} alt={project.title} />
                 </div>
               </div>
             </Card>
