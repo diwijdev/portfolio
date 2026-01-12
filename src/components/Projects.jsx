@@ -81,6 +81,8 @@ const ProjectImageZoom = ({ src, alt }) => {
   );
 };
 
+
+
 const Projects = () => {
   return (
     <section className='pb-16 lg:py-24'>
