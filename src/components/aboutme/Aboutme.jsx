@@ -12,6 +12,7 @@ import { FaGithubSquare } from "react-icons/fa";
 import TechIcon from './TechIcon'
 import CardTitle from './CardTitle'
 import ToolboxItems from './Toolboxitems'
+import MotionCard from './MotionCard'
 
 const toolbox = [
   { title: "Javascript",
@@ -64,14 +65,28 @@ const Aboutme = () => {
     <div className='py-20 lg:py-28'>
       <div id='about' className="container flex flex-col min-h-screen items-center justify-center">
         <SectionHeader title="About me" subtitle="A glimpse in my world" />
-        <div className='mt-20 flex flex-col gap-8 md:grid md:grid-cols-5 md:grid-rows-auto md:gap-8 lg:col-span-3'>
-          <Card className='flex flex-col px-8 pt-8 overflow-hidden col-span-3 row-span-2'>
+        <div className='mt-20 flex flex-col gap-8 md:grid md:grid-cols-5 md:grid-rows-auto lg:col-span-3'>
+          <MotionCard 
+          whileHover={{ scale: 0.98 }}
+          transition={{
+            type: "spring", 
+            stiffness: 260, 
+            damping: 18
+          }}
+          className='flex flex-col px-8 pt-8 overflow-hidden col-span-3 row-span-2'>
             <CardTitle title = "Who I am" subtitle = "A decently big paragraph abnout myself to tell people what I am interested in and how I love to put myself out there but I really dont A decently big paragraph abnout myself to tell people what I am interested in and how I love to put myself out A decently big paragraph abnout myself to tell people what I am interested in and how I love to put myself out there but I really dont A decently big paragraph abnout myself to tell people what I am interested in and how I love to put myself out" />
             <div className='mx-auto mt-6 flex-1 flex flex-col justify-center'>
               <img src={me} alt={me} className='rounded-3xl' />
             </div>  
-          </Card>
-          <Card className=" p-0 relative col-span-2 row-span-1">
+          </MotionCard>
+          <MotionCard 
+          whileHover={{ scale: 0.98 }}
+          transition={{
+            type: "spring", 
+            stiffness: 260, 
+            damping: 18
+          }}
+          className="p-0 relative col-span-2 row-span-1">
             <img src={map} alt={map} className='h-full w-full object-cover rounded-3xl'/>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full p-[3px] bg-gradient-to-r from-emerald-300 to-sky-400">
               <img
@@ -79,10 +94,17 @@ const Aboutme = () => {
                 className="size-16 rounded-full bg-black"
               />
             </div>
-          </Card>
-          <Card className='flex flex-col items-start col-span-2 row-span-2'>
-            <CardTitle title="Beyond the Code" subtitle="Explore my interests and hobbies!" className='px-6 py-6'/>
-            <div className='flex flex-col gap-4 px-2 mb-6'>
+          </MotionCard>
+          <MotionCard 
+          whileHover={{ scale: 0.98 }}
+          transition={{
+            type: "spring", 
+            stiffness: 260, 
+            damping: 18
+          }}
+          className='flex flex-col col-span-2 row-span-2'>
+            <CardTitle title="Beyond the Code" subtitle="Explore my interests and hobbies!" className='px-6 py-6 items-start'/>
+            <div className='flex flex-col items-center gap-4 mb-6'>
               {hobbies.map(item => (
                 <div key={item.title} className='inline-flex items-center gap-2 px-6 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1.5'>
                   <span className='font-medium text-gray-950'> {item.title} </span>
@@ -90,14 +112,21 @@ const Aboutme = () => {
                 </div>
               ))}
             </div>
-          </Card>
-          <Card className='flex flex-col col-span-3 row-span-1'>
+          </MotionCard>
+          <MotionCard 
+          whileHover={{ scale: 0.98 }}
+          transition={{
+            type: "spring", 
+            stiffness: 260, 
+            damping: 18
+          }}
+          className='flex flex-col col-span-3 row-span-1'>
             <CardTitle title="My Stack" subtitle= "Things I try to be proficient in" className='px-6 pt-6'/>
             <div className='flex flex-col justify center gap-4 px-2 mb-6'>
               <ToolboxItems toolboxItems={toolbox} className='mt-6'/>
               <ToolboxItems toolboxItems={toolbox} className='mt-6' itemsWrapper='-translate-x-1/2'/>
             </div>
-          </Card>
+          </MotionCard>
         </div>
       </div>
     </div> 
