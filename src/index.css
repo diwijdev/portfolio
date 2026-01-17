@@ -132,3 +132,71 @@ button:focus-visible {
     @apply lg:max-w-5xl
   }
 }
+
+@keyframes move-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-move-left {
+  animation: move-left 15s linear infinite;
+}
+
+@keyframes move-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-move-right {
+  animation: move-right 15s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.shine-ring {
+  background: conic-gradient(
+    from 0deg,
+    #00F5FF,
+    #000,
+    #000,
+    #00F5FF,
+    #000,
+    #000,
+    #000,
+    #00F5FF
+  );
+  background-size: 300% 300%;
+  animation: shine 6s ease-out infinite;
+}
+
+@keyframes rotate-glow {
+  0% { transform: rotate(70deg); }
+  50% { transform: rotate(100deg); }
+  100% { transform: rotate(70deg); }
+}
+
+.rainbow {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rainbow::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: 50% 30%;
+  filter: blur(6px);
+  background-image: linear-gradient(90deg, #ffffff, #00f5ff, #ffffff);
+  animation: rotate-glow 4s ease-in-out infinite;
+}

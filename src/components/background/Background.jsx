@@ -7,7 +7,7 @@ export default function Background() {
         
         <div className="fixed bg-black inset-0 -z-10 overflow-hidden">
         {/* Outer container clips the blur */}
-            <div className="absolute inset-4 blur-3xl w-full min-h-screen">
+            <div className="absolute inset-4 blur-3xl min-h-screen">
                 <Scene />
             </div>
         </div>
