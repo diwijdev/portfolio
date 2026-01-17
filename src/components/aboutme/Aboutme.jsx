@@ -9,7 +9,7 @@ import { FaHtml5 } from "react-icons/fa6";
 import { FaCss3Alt, FaReact, FaPython, FaGithubSquare, FaAws} from "react-icons/fa";
 import { PiFileSql } from "react-icons/pi";
 import CardTitle from './CardTitle'
-import ToolboxItems from './Toolboxitems'
+import ToolboxItems from './ToolboxItems'
 import MotionCard from './MotionCard'
 import { motion } from 'framer-motion'
 
