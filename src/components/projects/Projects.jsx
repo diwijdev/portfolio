@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import among from "/among.png";
 import toio from "/toioAR.png";
 import paper from "/mario.png";
+import memeMatcherPreview from "/meme-matcher.png";
 import { LiaExternalLinkAltSolid } from "react-icons/lia";
 import { GoDotFill } from "react-icons/go";
 import SectionHeader from "../SectionHeader";
@@ -12,7 +12,22 @@ import ComingSoon from "./ComingSoon";
 
 const portfolioProjects = [
 
-  {
+
+{
+  company: "Personal Project",
+  year: "2026",
+  title: "Cat Meme Matcher",
+  results: [
+    { title: "Built a real-time facial expression classifier using MediaPipe 3D face landmarks." },
+    { title: "Engineered pose-invariant geometric features to map facial metrics to meme categories." },
+    { title: "Developed and deployed a full-stack React + FastAPI system with live webcam processing." },
+  ],
+  link: "cat-meme-matcher.vercel.app",
+  image: memeMatcherPreview,
+},
+
+
+{
   company: "University of Calgary (Academic Project)",
   year: "2023",
   title: "CodeSwarm-AR",
@@ -27,7 +42,7 @@ const portfolioProjects = [
 
 {
   company: "University of Calgary (Academic Project)",
-  year: "2022",
+  year: "2023",
   title: "Embedded AR Games",
   results: [
     { title: "Built a 2D AR game with live, segmented body embedding." },
