@@ -32,9 +32,9 @@
 @media (max-width: 767px) {
   .glass-nav {
     top: 10px;
-    gap: 2px;
-    padding: 4px;
-    max-width: calc(100vw - 1rem);
+    gap: 3px;
+    padding: 5px;
+    max-width: calc(100vw - 0.75rem);
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -44,7 +44,7 @@
   }
 
   .glass-indicator {
-    inset: 4px auto 4px 4px;
+    inset: 5px auto 5px 5px;
   }
 }
 

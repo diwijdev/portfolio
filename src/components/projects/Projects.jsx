@@ -101,27 +101,6 @@ const portfolioProjects = [
   },
 ];
 
-const CloseIcon = () => (
-  <motion.svg
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0, transition: { duration: 0.05 } }}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="h-4 w-4 text-black"
-  >
-    <path d="M18 6l-12 12" />
-    <path d="M6 6l12 12" />
-  </motion.svg>
-);
-
 const ProjectCard = memo(function ProjectCard({
   project,
   index,
@@ -258,20 +237,9 @@ const Projects = () => {
             <div
               className="fixed inset-0 z-50 flex items-start justify-center px-4 pb-4 pt-20 pointer-events-none md:grid md:place-items-center md:p-4"
             >
-              <motion.button
-                key={`close-${active.title}-${id}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                className="pointer-events-auto absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white lg:hidden"
-                onClick={() => setActive(null)}
-              >
-                <CloseIcon />
-              </motion.button>
-
               <motion.div
                 layoutId={`card-${active.title}-${id}`}
-                onClick={(event) => event.stopPropagation()}
+                onClick={() => setActive(null)}
                 className="pointer-events-auto flex h-auto max-h-[calc(100dvh-7rem)] w-full max-w-[900px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0f151f] md:h-fit md:max-h-[90%]"
               >
                 <motion.div layoutId={`image-${active.title}-${id}`}>
