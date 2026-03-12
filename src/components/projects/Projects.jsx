@@ -105,6 +105,7 @@ const ProjectCard = memo(function ProjectCard({
   project,
   index,
   hovered,
+  canHover,
   setHovered,
   setActive,
   id,
@@ -112,17 +113,21 @@ const ProjectCard = memo(function ProjectCard({
   return (
     <motion.div
       layoutId={`card-${project.title}-${id}`}
-      onMouseEnter={() => setHovered(index)}
-      onMouseLeave={() => setHovered(null)}
+      onMouseEnter={() => {
+        if (canHover) setHovered(index);
+      }}
+      onMouseLeave={() => {
+        if (canHover) setHovered(null);
+      }}
       onClick={() => {
-        setHovered(null);
+        if (canHover) setHovered(null);
         setActive(project);
       }}
       className={cn(
         "rounded-2xl relative overflow-hidden h-64 md:h-105 w-full cursor-pointer",
         "border border-white/10 bg-[#0f151f]/60",
-        "transition-all duration-300 ease-out",
-        hovered !== null && hovered !== index && "blur-sm scale-[0.97] opacity-60"
+        "md:transition-all md:duration-300 md:ease-out",
+        canHover && hovered !== null && hovered !== index && "md:blur-sm md:scale-[0.97] md:opacity-60"
       )}
     >
       {/* Background image or ComingSoon */}
@@ -142,8 +147,8 @@ const ProjectCard = memo(function ProjectCard({
       <div
         className={cn(
           "absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent",
-          "flex flex-col justify-end p-5 transition-opacity duration-300",
-          hovered === index ? "opacity-100" : "opacity-0"
+          "flex flex-col justify-end p-5 md:transition-opacity md:duration-300",
+          canHover && hovered === index ? "opacity-100" : "opacity-0"
         )}
       >
         <div className="flex gap-2 text-white/50 text-xs mb-1">
@@ -166,8 +171,8 @@ const ProjectCard = memo(function ProjectCard({
       <div
         className={cn(
           "absolute inset-0 bg-gradient-to-t from-black/70 to-transparent",
-          "flex flex-col justify-end p-5 transition-opacity duration-300",
-          hovered === index ? "opacity-0" : "opacity-100"
+          "flex flex-col justify-end p-5 md:transition-opacity md:duration-300",
+          canHover && hovered === index ? "opacity-0" : "opacity-100"
         )}
       >
         <motion.h3
@@ -189,8 +194,28 @@ const ProjectCard = memo(function ProjectCard({
 
 const Projects = () => {
   const [hovered, setHovered] = useState(null);
+  const [canHover, setCanHover] = useState(false);
   const [active, setActive] = useState(null);
   const id = useId();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const updateCanHover = () => setCanHover(mediaQuery.matches);
+
+    updateCanHover();
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateCanHover);
+      return () => mediaQuery.removeEventListener("change", updateCanHover);
+    }
+
+    mediaQuery.addListener(updateCanHover);
+    return () => mediaQuery.removeListener(updateCanHover);
+  }, []);
+
+  useEffect(() => {
+    if (!canHover && hovered !== null) setHovered(null);
+  }, [canHover, hovered]);
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -325,6 +350,7 @@ const Projects = () => {
                 project={project}
                 index={index}
                 hovered={hovered}
+                canHover={canHover}
                 setHovered={setHovered}
                 setActive={setActive}
                 id={id}
