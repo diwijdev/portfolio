@@ -32,9 +32,9 @@ const experiences = [
 const Experience = () => {
   return (
     <div id="experience" className='py-20 lg:py-28'>
-      <div className='container flex flex-col min-h-screen justify-center'>
+      <div className='container flex flex-col min-h-screen items-center justify-center'>
         <SectionHeader title="Experience" subtitle="The teams and environments that shaped my journey"/>
-        <div className='flex flex-col mt-10 md:mt-16 md:w-3xl lg:w-4xl md:gap-12 lg-gap-16 md:space-y-10 will-change-transform'>
+        <div className='mt-10 flex w-full flex-col md:mt-16 md:max-w-3xl md:gap-12 md:space-y-10 lg:max-w-4xl will-change-transform'>
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
