@@ -109,12 +109,12 @@ const Header = () => {
           href={item.href}
           ref={(el) => (linkRefs.current[i] = el)}
           onClick={() => handleClick(i)}
-          className={`px-4 py-1.5 rounded-full text-sm md:text-lg lg:text-xl font-semibold transition-colors ${
+          className={`whitespace-nowrap rounded-full px-2 py-1 text-[11px] font-semibold transition-colors sm:px-2.5 sm:text-xs md:px-4 md:py-1.5 md:text-lg lg:text-xl ${
             active === i ? "text-white" : "text-white/70 hover:text-white"
           }`}
         >
           {item.type === "logo" ? (
-            <BrandLogo size={22} className="opacity-90" />
+            <BrandLogo size={18} className="opacity-90 md:h-[22px] md:w-[22px]" />
           ) : (
             item.label
           )}

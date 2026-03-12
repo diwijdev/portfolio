@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useId, useRef, useState } from "react";
+import React, { memo, useEffect, useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import toio from "/toioAR.png";
 import paper from "/mario.png";
@@ -211,21 +211,16 @@ const ProjectCard = memo(function ProjectCard({
 const Projects = () => {
   const [hovered, setHovered] = useState(null);
   const [active, setActive] = useState(null);
-  const ref = useRef(null);
   const id = useId();
 
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") setActive(null);
     }
-    function onClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) setActive(null);
-    }
 
     if (active) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", onKeyDown);
-      document.addEventListener("mousedown", onClickOutside);
     } else {
       document.body.style.overflow = "auto";
     }
@@ -233,7 +228,6 @@ const Projects = () => {
     return () => {
       document.body.style.overflow = "auto";
       window.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("mousedown", onClickOutside);
     };
   }, [active]);
 
@@ -252,7 +246,8 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm h-full w-full z-40"
+              onClick={() => setActive(null)}
+              className="fixed inset-0 z-40 h-full w-full cursor-pointer bg-black/40 backdrop-blur-sm"
             />
           )}
         </AnimatePresence>
@@ -260,13 +255,15 @@ const Projects = () => {
         {/* Expanded modal */}
         <AnimatePresence>
           {active && (
-            <div className="fixed inset-0 grid place-items-center z-50 p-4">
+            <div
+              className="fixed inset-0 z-50 flex items-start justify-center px-4 pb-4 pt-20 pointer-events-none md:grid md:place-items-center md:p-4"
+            >
               <motion.button
                 key={`close-${active.title}-${id}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                className="flex absolute top-4 right-4 lg:hidden items-center justify-center bg-white rounded-full h-8 w-8"
+                className="pointer-events-auto absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white lg:hidden"
                 onClick={() => setActive(null)}
               >
                 <CloseIcon />
@@ -274,8 +271,8 @@ const Projects = () => {
 
               <motion.div
                 layoutId={`card-${active.title}-${id}`}
-                ref={ref}
-                className="w-full max-w-[900px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-[#0f151f] border border-white/10 rounded-3xl overflow-hidden"
+                onClick={(event) => event.stopPropagation()}
+                className="pointer-events-auto flex h-auto max-h-[calc(100dvh-7rem)] w-full max-w-[900px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0f151f] md:h-fit md:max-h-[90%]"
               >
                 <motion.div layoutId={`image-${active.title}-${id}`}>
                   {active.comingSoon || !active.image ? (

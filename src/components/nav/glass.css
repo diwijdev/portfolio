@@ -29,6 +29,25 @@
   isolation: isolate; /* ✅ instead of position: relative */
 }
 
+@media (max-width: 767px) {
+  .glass-nav {
+    top: 10px;
+    gap: 2px;
+    padding: 4px;
+    max-width: calc(100vw - 1rem);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .glass-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .glass-indicator {
+    inset: 4px auto 4px 4px;
+  }
+}
+
 .glass-indicator {
   position: absolute;
   inset: 6px auto 6px 6px;

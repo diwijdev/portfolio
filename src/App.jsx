@@ -13,7 +13,7 @@ function App() {
     <>
       <Analytics />
       <Background />
-      <main className="flex flex-col items-center px-4 md:px-8 lg:px-16">
+      <main className="flex w-full flex-col items-center px-4 md:px-8 lg:px-16">
         <Header />
         <Hero />
         <Aboutme />

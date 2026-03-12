@@ -172,7 +172,7 @@ export const Hero = () => {
     
     
     return (
-        <div id='home' className="container flex flex-wrap min-h-screen items-center justify-center">
+        <div id='home' className="container flex min-h-screen w-full flex-wrap items-center justify-center">
             <Motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ml-2 lg:block hidden" variants={mainlogo} initial="initial" animate="animate" 
                 >
                     <Motion.svg id="target" width="399" height="199" viewBox="0 0 399 399" fill="none" ref={scope} xmlns="http://www.w3.org/2000/svg">
@@ -202,7 +202,7 @@ export const Hero = () => {
                         <Motion.path id="rightBracket"/*variants={rBracket} initial="initial" animate="animate"*/ fill-rule="evenodd" clip-rule="evenodd" d="M337.612 140.551L373.707 176.646L337.612 212.741L220.933 329.42L184.838 293.325L301.517 176.646L184.838 59.9671L220.933 23.8722L337.612 140.551Z" fill="url(#rbracketGradient)" />
                     </Motion.svg>
                 </Motion.div>
-            <div className="flex flex-col relative w-auto">                
+            <div className="relative flex w-full max-w-full flex-col px-2 sm:px-4 md:w-auto md:px-0">                
                 
                 <Motion.div className="flex flex-wrap flex-row items-center gap-10"
                     variants={svgVariants}
@@ -211,7 +211,7 @@ export const Hero = () => {
                 >
                     <Motion.div className="relative flex flex-col lg:flex-row items-center justify-center md:justify-between w-full gap-x-10">
                         <Motion.h1
-                            className="font-light text-[87px] ml-7 tracking-[40px] bg-gradient-to-b from-[#ED1B68] via-[#ED1B68] to-[#9f0b1d] bg-clip-text text-transparent [-webkit-text-fill-color:transparent] inline-block"
+                            className="inline-block bg-gradient-to-b from-[#ED1B68] via-[#ED1B68] to-[#9f0b1d] bg-clip-text font-light text-[52px] tracking-[16px] text-transparent [-webkit-text-fill-color:transparent] sm:text-[64px] sm:tracking-[20px] md:ml-7 md:text-[87px] md:tracking-[40px]"
                             variants={nameVariants}
                             initial="initial"
                             animate="animate"
@@ -237,7 +237,7 @@ export const Hero = () => {
                                 />
                             </svg>
                         </Motion.div>
-                        <Motion.h1 className="font-light text-[87px] opacity-0 tracking-[40px] text-transparent absolute lg:relative" > 
+                        <Motion.h1 className="absolute font-light text-[52px] opacity-0 tracking-[16px] text-transparent sm:text-[64px] sm:tracking-[20px] md:text-[87px] md:tracking-[40px] lg:relative" > 
                             DIWIJ
                         </Motion.h1>
                     </Motion.div>
@@ -248,7 +248,7 @@ export const Hero = () => {
                     initial="initial"
                     animate="animate"
                 >
-                    <Motion.p className="absolute translate-y-20 md:px-8.5 md:text-xl md:font-light">
+                    <Motion.p className="absolute translate-y-20 px-2 text-center md:px-8 md:text-left md:text-xl md:font-light">
                         Part developer, part designer, part data nerd — fully caffeinated.
                     </Motion.p>
                 </Motion.div>
