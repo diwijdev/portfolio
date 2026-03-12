@@ -31,8 +31,8 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <div  className='py-20 lg:py-28'>
-      <div id="experience"className='container flex flex-col min-h-screen justify-center'>
+    <div id="experience" className='py-20 lg:py-28'>
+      <div className='container flex flex-col min-h-screen justify-center'>
         <SectionHeader title="Experience" subtitle="The teams and environments that shaped my journey"/>
         <div className='flex flex-col mt-10 md:mt-16 md:w-3xl lg:w-4xl md:gap-12 lg-gap-16 md:space-y-10 will-change-transform'>
           {experiences.map((exp, index) => (

@@ -6,10 +6,12 @@ import Projects from './components/projects/Projects';
 import Contact from './components/contact/Contact';
 import Footer from './components/Footer';
 import Header from './components/nav/Header';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
     <>
+      <Analytics />
       <Background />
       <main className="flex flex-col items-center px-4 md:px-8 lg:px-16">
         <Header />
