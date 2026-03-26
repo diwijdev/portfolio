@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import toio from "/toioAR.png";
 import paper from "/mario.png";
 import bs from "/bookshelf.png";
+import clearpass from "/clearpass.png";
 import memeMatcherPreview from "/meme-matcher.png";
 import { LiaExternalLinkAltSolid } from "react-icons/lia";
 import { GoDotFill } from "react-icons/go";
@@ -17,9 +18,9 @@ const portfolioProjects = [
     year: "2026",
     title: "Cat Meme Matcher",
     results: [
-      { title: "Built a real-time facial expression classifier using MediaPipe 3D face landmarks." },
-      { title: "Engineered pose-invariant geometric features to map facial metrics to meme categories." },
-      { title: "Developed and deployed a full-stack React + FastAPI system with live webcam processing." },
+      { title: "Built a real-time facial expression classifier using MediaPipe 3D face landmarks and pose-invariant geometric features." },
+      { title: "Mapped facial metrics to cat meme categories through a custom expression-matching algorithm." },
+      { title: "Developed and deployed a full-stack React + FastAPI app with live webcam processing on Vercel." },
     ],
     link: "https://cat-meme-matcher.vercel.app",
     image: memeMatcherPreview,
@@ -29,12 +30,24 @@ const portfolioProjects = [
     year: "2026",
     title: "The Reading Room",
     results: [
-      { title: "Developed an interactive virtual reading room where users organize a personal bookshelf and manage their book collection." },
-      { title: "Implemented draggable decor and persistent room layouts using React, Framer Motion, and Supabase." },
-      { title: "Built and deployed a full-stack application with authentication, responsive UI, and cloud persistence on Vercel." },
+      { title: "Designed an interactive virtual reading room with a customizable bookshelf and draggable room decor." },
+      { title: "Implemented persistent layouts and book management using Supabase with real-time cloud sync." },
+      { title: "Built a full-stack Next.js app with authentication, responsive design, and Framer Motion animations." },
     ],
     link: "https://the-reading-room-beta.vercel.app",
-    image: bs
+    image: bs,
+  },
+  {
+    company: "Personal Project",
+    year: "2026",
+    title: "ClearPass",
+    results: [
+      { title: "Built a clinical shift handoff tool that structures patient vitals, conditions, and care notes for safer transitions." },
+      { title: "Integrated HAPI FHIR R4 for live EHR data with graceful fallback to curated sample records." },
+      { title: "Designed a mobile-first React + TypeScript app with tab-based navigation, task tracking, and Supabase persistence." },
+    ],
+    link: "https://clearpass-dev.vercel.app/",
+    image: clearpass,
   },
   {
     company: "University of Calgary (Academic Project)",
